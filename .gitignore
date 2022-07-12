@@ -3,4 +3,4 @@
 .idea/vcs.xml
 .idea/encodings.xml
 main.cpp
-template.cpp
+*.md
