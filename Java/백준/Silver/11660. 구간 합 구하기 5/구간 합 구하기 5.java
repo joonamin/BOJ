@@ -5,14 +5,9 @@ public class Main {
     static int N, M, board[][], acsum[][];
 
     private static int query(int[] args) {
-        int x1 = args[0] - 1, y1 = args[1] - 1;
-        int x2 = args[2] - 1, y2 = args[3] - 1;
-        int result = 0;
-        for (int i = x1; i <= x2; i++) {
-            int prev = (y1 == 0) ? 0 : acsum[i][y1 - 1];
-            result += acsum[i][y2] - prev;
-        }
-        return result;
+        int x1 = args[0], y1 = args[1];
+        int x2 = args[2], y2 = args[3];
+        return acsum[x2][y2] - acsum[x1 - 1][y2] - acsum[x2][y1 - 1] + acsum[x1 - 1][y1 - 1];
     }
 
     public static void main(String[] args) throws IOException {
@@ -20,17 +15,13 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
-        board = new int[N][N];
-        acsum = new int[N][N];
-        for (int i = 0; i < N; i++) {
+        board = new int[N + 1][N + 1];
+        acsum = new int[N + 1][N + 1];
+        for (int i = 1; i <= N; i++) {
             st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < N; j++) {
+            for (int j = 1; j <= N; j++) {
                 board[i][j] = Integer.parseInt(st.nextToken());
-                if (j == 0) {
-                    acsum[i][0] = board[i][0];
-                } else {
-                    acsum[i][j] = acsum[i][j - 1] + board[i][j];
-                }
+                acsum[i][j] = board[i][j] + acsum[i - 1][j] + acsum[i][j - 1] - acsum[i - 1][j - 1];
             }
         }
         StringBuilder sb = new StringBuilder();
