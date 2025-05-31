@@ -9,21 +9,15 @@ public class Main {
         N = Integer.parseInt(br.readLine());
         v = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
-        int[][] dp = new int[N][2];
-        dp[0] = new int[] { v[0], v[0] }; // {last_val, sum}
-        for (int i = 1; i < N; i++) {
-            dp[i][0] = dp[i][1] = v[i];
+        int[] dp = new int[N];
+        for (int i = 0; i < N; i++) {
+            dp[i] = v[i];
             for (int j = 0; j < i; j++) {
-                if (dp[j][0] > v[i] && dp[j][1] + v[i] > dp[i][1]) {
-                    dp[i][0] = v[i];
-                    dp[i][1] = v[i] + dp[j][1];
+                if (v[j] > v[i] && dp[i] < dp[j] + v[i]) {
+                    dp[i] = dp[j] + v[i];
                 }
             }
         }
-        int ans = 0;
-        for (int i = 0; i < N; i++) {
-            ans = Math.max(ans, dp[i][1]);
-        }
-        System.out.println(ans);
+        System.out.println(Arrays.stream(dp).max().getAsInt());
     }
 }
