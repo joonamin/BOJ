@@ -21,18 +21,22 @@ public class Main {
 
         StringBuilder sb = new StringBuilder();
         while (Q-- > 0) {
-            int[] line = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            if (line[0] == 1) {
-                if (A[line[1]] == 1) {
-                    A[line[1]] = 0;
-                    ts.remove(line[1]);
+            StringTokenizer stQuery = new StringTokenizer(br.readLine());
+            int cmd = Integer.parseInt(stQuery.nextToken());
+            
+            if (cmd == 1) {
+                int val = Integer.parseInt(stQuery.nextToken());
+                if (A[val] == 1) {
+                    A[val] = 0;
+                    ts.remove(val);
                 } else {
-                    A[line[1]] = 1;
-                    ts.add(line[1]);
+                    A[val] = 1;
+                    ts.add(val);
                 }
-            } else if (line[0] == 2) {
-                cur = (cur - 1 + line[1]) % N + 1;
-            } else if (line[0] == 3) {
+            } else if (cmd == 2) {
+                int val = Integer.parseInt(stQuery.nextToken());
+                cur = (cur - 1 + val) % N + 1;
+            } else if (cmd == 3) {
                 NavigableSet<Integer> res = ts.tailSet(cur, true);
                 if (res.isEmpty()) {
                     if (ts.headSet(cur).isEmpty()) {
