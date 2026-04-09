@@ -1,4 +1,3 @@
-
 import java.io.*;
 import java.util.*;
 
@@ -14,8 +13,8 @@ public class Main {
                 break;
             int res = 0;
             for (char ch1 : line.toCharArray()) {
-                Character ch = Character.toLowerCase(ch1);
-                if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+                Character ch2 = Character.toLowerCase(ch1);
+                if (ch2 == 'a' || ch2 == 'e' || ch2 == 'i' || ch2 == 'o' || ch2 == 'u') {
                     res++;
                 }
             }
